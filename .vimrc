@@ -3,13 +3,14 @@ syntax on
 set guifont=Source\ Code\ Pro
 set background=dark
 set t_Co=256
+set re=1
 
 try
   colorscheme onedark
   hi Normal ctermfg=white
   hi Comment ctermfg=grey
   highlight LineNr ctermfg=grey
-  match Keyword /self/
+  set cursorline
 catch
 endtry
 
@@ -30,8 +31,11 @@ set noswapfile
 " show cursor at current position and copy
 set mouse=r
 set ruler
-set cursorline
 set clipboard+=unnamed
+
+" show where 80 characters is
+set textwidth=80
+set colorcolumn=+1
 
 " show filepath
 set laststatus=2
@@ -47,7 +51,7 @@ function SetPythonOptions()
   set tabstop=4
   set shiftwidth=4
   set indentkeys&
-  set colorcolumn=80
+  match Keyword /self/
 endfunction
 
 " .sh files
@@ -87,5 +91,12 @@ set novisualbell
 set t_vb=
 set tm=500
 
-let g:pymode_python = 'python3'
-let g:pymode_lint_on_write = 0
+" python linting
+"let g:pymode_python = 'python3'
+"let g:pymode_lint_on_write = 0
+
+" local config
+if filereadable($HOME . "/.vimrc.local")
+  source ~/.vimrc.local
+endif
+

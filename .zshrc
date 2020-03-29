@@ -2,28 +2,55 @@
 if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
 fi
+
 if [ -f ~/.bashrc ]; then
  . ~/.bashrc
 fi
 
-# set paths
+if [ -f ~/.bash_profile ]; then
+ . ~/.bash_profile
+fi
+
+# environment variables
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="$HOME/miniconda3/bin:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(direnv hook zsh)"
+export PY_VERSION='3.6.5'
 
-# set themes and fonts
+if [ -d "$HOME/.pyenv" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
+
+if [ -f "$HOME/.direnvrc" ]; then
+  eval "$(direnv hook zsh)"
+fi
+
+if [ -f "/usr/local/bin/pipenv" ]; then
+  eval "$(pipenv --completion)"
+fi
+
+# zsh themes, fonts, and settings
 ZSH_THEME=""
-if [--e $HOME/.zsh/pure ]; then
+fpath=( "$HOME/.zfunctions" $fpath )
+pure_path="/usr/local/share/zsh/site-functions/prompt_pure_setup"
+
+if [[ -f $pure_path || -d "$HOME/.zsh/pure" ]]; then
   autoload -U promptinit; promptinit
-  VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-  zstyle :prompt:pure:virtualenv color cyan
   prompt pure
   PURE_PROMPT_SYMBOL=(∫)
 fi
 
-source $ZSH/oh-my-zsh.sh
+if [ -f $ZSH/oh-my-zsh.sh ]; then
+  . $ZSH/oh-my-zsh.sh
+fi
+
+# syntax highlighting
+if [ -f "$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+  . $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  ZSH_HIGHLIGHT_STYLES[path]=none
+  ZSH_HIGHLIGHT_STYLES[path_prefix]=none
+fi
 
 # editor & enable color support of ls
 export EXPORT='vim'
@@ -40,6 +67,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 # jupyter notebook aliases
-alias nb="jupyter notebook --port=8888 --ip=0.0.0.0 --no-browser --NotebookApp.token='' --NotebookApp.password=''"
-alias jb=nb
-alias jn=jb
+alias jn="jupyter notebook --port=8888 --ip='0.0.0.0' --NotebookApp.token='' --NotebookApp.password=''"
+alias nb=jn
+alias jnr="jupyter notebook --port=8888 --ip='0.0.0.0' --no-browser --NotebookApp.token='' --NotebookApp.password=''"
+alias nbr=jnr
