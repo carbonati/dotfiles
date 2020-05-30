@@ -799,9 +799,10 @@ div.notification_widget {
 #kernel_logo_widget .current_kernel_logo {
  display: none;
 }
-div#ipython_notebook {
+/*div#ipython_notebook {
  display: none;
 }
+*/
 i.fa.fa-icon {
  -webkit-font-smoothing: antialiased;
  -moz-osx-font-smoothing: grayscale;
@@ -3234,9 +3235,6 @@ body :focus .MathJax {
  width: auto;
 }
 div#maintoolbar {
- display: none !important;
-}
-#header-container {
  display: none !important;
 }
 
