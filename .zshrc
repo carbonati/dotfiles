@@ -14,6 +14,9 @@ fi
 # environment variables
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="$HOME/miniconda3/bin:$PATH"
+export CUDA_HOME=/usr/local/cuda
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
+export PATH=$PATH:$CUDA_HOME/bin
 export PY_VERSION='3.6.5'
 
 if [ -d "$HOME/.pyenv" ]; then
@@ -51,6 +54,19 @@ if [ -f "$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
   ZSH_HIGHLIGHT_STYLES[path]=none
   ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 fi
+
+# conda
+__conda_setup="$('$HOME/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="$HOME/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
 
 # editor & enable color support of ls
 export EXPORT='vim'

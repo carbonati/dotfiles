@@ -33,10 +33,6 @@ set mouse=r
 set ruler
 set clipboard+=unnamed
 
-" show where 80 characters is
-set textwidth=80
-set colorcolumn=+1
-
 " show filepath
 set laststatus=2
 set statusline+=%F
@@ -52,6 +48,8 @@ function SetPythonOptions()
   set shiftwidth=4
   set indentkeys&
   match Keyword /self/
+  " show where 80 characters is
+  set colorcolumn=80
 endfunction
 
 " .sh files
