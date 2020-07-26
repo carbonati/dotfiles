@@ -90,8 +90,8 @@ set t_vb=
 set tm=500
 
 " python linting
-"let g:pymode_python = 'python3'
-"let g:pymode_lint_on_write = 0
+let g:pymode_python = 'python3'
+let g:pymode_lint_on_write = 0
 
 " local config
 if filereadable($HOME . "/.vimrc.local")
