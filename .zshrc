@@ -71,6 +71,7 @@ unset __conda_setup
 # editor & enable color support of ls
 export EXPORT='vim'
 export CLICOLOR=YES
+export TERM=screen-256color
 
 # ls and grpe aliases
 alias ls='ls -Gp'
