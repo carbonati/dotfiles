@@ -89,6 +89,9 @@ set novisualbell
 set t_vb=
 set tm=500
 
+" show match position
+set shortmess-=S
+
 " python linting
 let g:pymode_python = 'python3'
 let g:pymode_lint_on_write = 0
@@ -97,4 +100,3 @@ let g:pymode_lint_on_write = 0
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
-

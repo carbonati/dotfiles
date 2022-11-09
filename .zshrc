@@ -35,10 +35,10 @@ fi
 
 # zsh themes, fonts, and settings
 ZSH_THEME=""
-fpath=( "$HOME/.zfunctions" $fpath )
 pure_path="/usr/local/share/zsh/site-functions/prompt_pure_setup"
 
 if [[ -f $pure_path || -d "$HOME/.zsh/pure" ]]; then
+  fpath=( "$HOME/.zfunctions" $fpath )
   autoload -U promptinit; promptinit
   prompt pure
   PURE_PROMPT_SYMBOL=(∫)
@@ -54,19 +54,6 @@ if [ -f "$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
   ZSH_HIGHLIGHT_STYLES[path]=none
   ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 fi
-
-# conda
-__conda_setup="$('$HOME/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
 
 # editor & enable color support of ls
 export EXPORT='vim'
